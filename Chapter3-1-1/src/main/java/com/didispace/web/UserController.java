@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @blog http://blog.didispace.com
  *
  */
-@RestController
+@RestController     // restcontroller默认返json
 @RequestMapping(value="/users")     // 通过这里配置使下面的映射都在/users下，可去除
 public class UserController {
 
