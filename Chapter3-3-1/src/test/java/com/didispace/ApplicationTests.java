@@ -10,6 +10,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
@@ -35,7 +36,7 @@ public class ApplicationTests {
 		userRepository.save(new User("JJJ", 100));
 
 		// 测试findAll, 查询所有记录
-		Assert.assertEquals(10, userRepository.findAll().size());
+		Assert.assertEquals(10L, userRepository.findAll().size());
 
 		// 测试findByName, 查询姓名为FFF的User
 		Assert.assertEquals(60, userRepository.findByName("FFF").getAge().longValue());
@@ -50,7 +51,7 @@ public class ApplicationTests {
 		userRepository.delete(userRepository.findByName("AAA"));
 
 		// 测试findAll, 查询所有记录, 验证上面的删除是否成功
-		Assert.assertEquals(9, userRepository.findAll().size());
+		Assert.assertEquals(9L, userRepository.findAll().size());
 
 	}
 

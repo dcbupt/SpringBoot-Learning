@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
@@ -21,16 +24,25 @@ public class ApplicationTests {
 	public void test() throws Exception {
 
 		// 创建10条记录
-		userRepository.save(new User("AAA", 10));
-		userRepository.save(new User("BBB", 20));
-		userRepository.save(new User("CCC", 30));
-		userRepository.save(new User("DDD", 40));
-		userRepository.save(new User("EEE", 50));
-		userRepository.save(new User("FFF", 60));
-		userRepository.save(new User("GGG", 70));
-		userRepository.save(new User("HHH", 80));
-		userRepository.save(new User("III", 90));
-		userRepository.save(new User("JJJ", 100));
+		userRepository.save(new User("AAA", 10, new Date()));
+		userRepository.save(new User("BBB", 20, new Date()));
+		userRepository.save(new User("CCC", 30, new Date()));
+		userRepository.save(new User("DDD", 40, new Date()));
+		userRepository.save(new User("EEE", 50, new Date()));
+		userRepository.save(new User("FFF", 60, new Date()));
+		userRepository.save(new User("GGG", 70, new Date()));
+		userRepository.save(new User("HHH", 80, new Date()));
+		userRepository.save(new User("III", 90, new Date()));
+		userRepository.save(new User("JJJ", 100, new Date()));
+
+		//List<User> users = userRepository.findAll();
+		//users.sort(Comparator.comparing(User::getDate, Comparator.reverseOrder()));
+		List<User> users = userRepository.findByDateDesc();
+		users.forEach(user -> {
+			System.out.println(user);
+		});
+
+
 
 		// 测试findAll, 查询所有记录
 		Assert.assertEquals(10, userRepository.findAll().size());

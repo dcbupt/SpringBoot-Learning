@@ -3,7 +3,10 @@ package com.didispace.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.TableGenerator;
+import java.util.Date;
 
 /**
  * @author 程序猿DD
@@ -15,7 +18,14 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="pk_gen")
+    @TableGenerator(name = "pk_gen",    // 该表主键生成策略的名称，它被引用在@GeneratedValue中设置的“generator”值中
+        table="tb_generator",   // 表生成策略所持久化的表名
+        pkColumnName="gen_name",    // 在持久化表中，该主键生成策略所对应键值的名称
+        valueColumnName="gen_value",    // 在持久化表中，该主键当前所生成的值，它的值将会随着每次创建累加
+        pkColumnValue="USER",    // 在持久化表中，该生成策略所对应的主键
+        allocationSize=1    // 每次主键值增加的大小
+    )
     private Long id;
 
     @Column(nullable = false)
@@ -24,11 +34,15 @@ public class User {
     @Column(nullable = false)
     private Integer age;
 
+    @Column(nullable = false)
+    private Date date;
+
     public User(){}
 
-    public User(String name, Integer age) {
+    public User(String name, Integer age, Date date) {
         this.name = name;
         this.age = age;
+        this.date = date;
     }
 
     public Long getId() {
@@ -51,8 +65,20 @@ public class User {
         return age;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public void setAge(Integer age) {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return this.name + " " + this.date;
+    }
 }

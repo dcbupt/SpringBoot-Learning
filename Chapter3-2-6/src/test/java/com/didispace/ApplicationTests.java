@@ -18,10 +18,10 @@ public class ApplicationTests {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Before
-	public void setUp() {
-		userRepository.deleteAll();
-	}
+	//@Before
+	//public void setUp() {
+	//	userRepository.deleteAll();
+	//}
 
 	@Test
 	public void test() throws Exception {

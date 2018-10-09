@@ -29,7 +29,7 @@ public class Application {
             executor.setMaxPoolSize(20);
             executor.setQueueCapacity(200);
             executor.setKeepAliveSeconds(60);
-            executor.setThreadNamePrefix("taskExecutor-");
+            executor.setThreadNamePrefix("ddc-");
             executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
             return executor;
         }
